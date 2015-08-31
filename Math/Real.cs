@@ -47,9 +47,9 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
-using System.Xml;
-using System.Xml.Schema;
+//using System.Xml.Serialization;
+//using System.Xml;
+//using System.Xml.Schema;
 #if !NETFX_CORE
 using System.Security.Permissions;
 #endif
@@ -67,7 +67,7 @@ namespace Axiom.Math {
     [StructLayout(LayoutKind.Sequential)]
 #if !( XBOX || XBOX360 || NETFX_CORE )
     [Serializable]
-    public struct Real : ISerializable, IComparable<Real>, IConvertible, IXmlSerializable
+    public struct Real : ISerializable, IComparable<Real>, IConvertible/*, IXmlSerializable*/
 #elif NETFX_CORE
 	public struct Real : IComparable<Real>
 #else
@@ -814,35 +814,35 @@ namespace Axiom.Math {
         //    throw new NotImplementedException();
         //}
 
-        public void WriteXml(XmlWriter writer) {
-            writer.WriteString(this._value.ToString(CultureInfo.InvariantCulture));
-        }
+        //public void WriteXml(XmlWriter writer) {
+        //    writer.WriteString(this._value.ToString(CultureInfo.InvariantCulture));
+        //}
 
-        public void ReadXml(XmlReader reader) {
-#if AXIOM_REAL_AS_SINGLE || !( AXIOM_REAL_AS_DOUBLE )
-            try {
-                var v = reader.ReadElementContentAsString();
-                this._value = float.Parse(v, CultureInfo.InvariantCulture);
-            }
-            catch (Exception e) {
-                Console.WriteLine(e.Message);
-            }
-#else
-			try
-			{
-				string v = reader.ReadElementContentAsString();
-				this._value = double.Parse( v, CultureInfo.InvariantCulture );
-			}
-			catch ( Exception e )
-			{
-				Console.WriteLine( e.Message );
-			}
-#endif
-        }
+//        public void ReadXml(XmlReader reader) {
+//#if AXIOM_REAL_AS_SINGLE || !( AXIOM_REAL_AS_DOUBLE )
+//            try {
+//                var v = reader.ReadElementContentAsString();
+//                this._value = float.Parse(v, CultureInfo.InvariantCulture);
+//            }
+//            catch (Exception e) {
+//                Console.WriteLine(e.Message);
+//            }
+//#else
+//            try
+//            {
+//                string v = reader.ReadElementContentAsString();
+//                this._value = double.Parse( v, CultureInfo.InvariantCulture );
+//            }
+//            catch ( Exception e )
+//            {
+//                Console.WriteLine( e.Message );
+//            }
+//#endif
+//        }
 
-        public XmlSchema GetSchema() {
-            return (null);
-        }
+//        public XmlSchema GetSchema() {
+//            return (null);
+//        }
 
         #endregion
     }

@@ -37,16 +37,28 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\Deque.cs" />
+    <Compile Include="Core\AtomicWrappers.cs" />
     <Compile Include="Core\BitConverterEx.cs" />
+    <Compile Include="Core\ITimer.cs" />
     <Compile Include="Core\Memory.cs" />
     <Compile Include="Core\DisposableObject.cs" />
     <Compile Include="Core\ObjectTextDisplay.cs" />
     <Compile Include="Core\Pair.cs" />
+    <Compile Include="Core\Resource.cs" />
+    <Compile Include="Core\ResourceGroupManager.cs" />
+    <Compile Include="Core\ResourceManager.cs" />
+    <Compile Include="Core\Timer.cs" />
+    <Compile Include="Core\WorkQueue\DefaultWorkQueue.cs" />
+    <Compile Include="Core\WorkQueue\DefaultWorkQueueBase.cs" />
+    <Compile Include="Core\WorkQueue\RequestID.cs" />
+    <Compile Include="Core\WorkQueue\ResourceBackgroundQueue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\WorkQueue\WorkQueue.cs" />
     <Compile Include="CrossPlatform\ExtensionMethods.cs" />
     <Compile Include="Math\AxisAlignedBox.cs" />
     <Compile Include="Math\Collections\BaseCollection.cs" />
