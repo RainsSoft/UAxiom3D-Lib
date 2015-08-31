@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Uaxiom3d-lib by RainsSoft</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Uaxiom3d-lib</h1>
+      <h2 class="project-tagline">UAxiom3D lib is Extracted from axiom3d,this lib can using in unity3d (unity5),if you are ogre3d/mogre3d/axiom3d developer,this is very useful. this lib conrains : filesystem,factory desgin,WorkQueue,LogManager,ResourceManager,Singleton,Deque,CrossPlatform Buffer, axiom math and more...</h2>
+      <a href="https://github.com/RainsSoft/UAxiom3D-Lib" class="btn">View on GitHub</a>
+      <a href="https://github.com/RainsSoft/UAxiom3D-Lib/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/RainsSoft/UAxiom3D-Lib/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="region-namespace-declarations" class="anchor" href="#region-namespace-declarations" aria-hidden="true"><span class="octicon octicon-link"></span></a>region Namespace Declarations</h1>
+
+<p>using System;
+using System.Runtime.InteropServices;
+using System.Threading;</p>
+
+<h1>
+<a id="endregion-namespace-declarations" class="anchor" href="#endregion-namespace-declarations" aria-hidden="true"><span class="octicon octicon-link"></span></a>endregion Namespace Declarations</h1>
+
+<p>namespace Axiom.Core {
+    public interface ITypePointer {
+        T this[int index] { get; set; }
+    };</p>
+
+<pre><code>[StructLayout(LayoutKind.Explicit)]
+public struct TwoByte {
+    [FieldOffset(0)]
+    public short Short;
+
+    [FieldOffset(0)]
+    public ushort UShort;
+</code></pre>
+
+<h1>
+<a id="if-axiom_big_endian" class="anchor" href="#if-axiom_big_endian" aria-hidden="true"><span class="octicon octicon-link"></span></a>if AXIOM_BIG_ENDIAN</h1>
+
+<pre><code>    [FieldOffset( 1 )] public byte b0;
+    [FieldOffset( 0 )] public byte b1;
+</code></pre>
+
+<h1>
+<a id="else" class="anchor" href="#else" aria-hidden="true"><span class="octicon octicon-link"></span></a>else</h1>
+
+<pre><code>    [FieldOffset(0)]
+    public byte b0;
+
+    [FieldOffset(1)]
+    public byte b1;
+
+    public byte[] Bytes {
+        get {
+            return new[]
+                   {
+                    this.b0, this.b1
+                   };
+        }
+        set {
+            this.b0 = value[0];
+            this.b1 = value[1];
+        }
+    }
+</code></pre>
+
+<h1>
+<a id="endif" class="anchor" href="#endif" aria-hidden="true"><span class="octicon octicon-link"></span></a>endif</h1>
+
+<pre><code>};
+
+[StructLayout(LayoutKind.Explicit)]
+public struct FourByte {
+    [FieldOffset(0)]
+    public float Float;
+
+    [FieldOffset(0)]
+    public int Int;
+
+    [FieldOffset(0)]
+    public uint UInt;
+</code></pre>
+
+<h1>
+<a id="if-axiom_big_endian-1" class="anchor" href="#if-axiom_big_endian-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>if AXIOM_BIG_ENDIAN</h1>
+
+<pre><code>    [FieldOffset( 3 )] public byte b0;
+    [FieldOffset( 2 )] public byte b1;
+    [FieldOffset( 1 )] public byte b2;
+    [FieldOffset( 0 )] public byte b3;
+</code></pre>
+
+<h1>
+<a id="else-1" class="anchor" href="#else-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>else</h1>
+
+<pre><code>    [FieldOffset(0)]
+    public byte b0;
+
+    [FieldOffset(1)]
+    public byte b1;
+
+    [FieldOffset(2)]
+    public byte b2;
+
+    [FieldOffset(3)]
+    public byte b3;
+</code></pre>
+
+<h1>
+<a id="endif-1" class="anchor" href="#endif-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>endif</h1>
+
+<pre><code>    public byte[] Bytes {
+        get {
+            return new[]
+                   {
+                    this.b0, this.b1, this.b2, this.b3
+                   };
+        }
+        set {
+            this.b0 = value[0];
+            this.b1 = value[1];
+            this.b2 = value[2];
+            this.b3 = value[3];
+        }
+    }
+};
+
+[StructLayout(LayoutKind.Explicit)]
+public struct EightByte {
+    [FieldOffset(0)]
+    public double Double;
+
+    [FieldOffset(0)]
+    public long Long;
+
+    [FieldOffset(0)]
+    public ulong ULong;
+</code></pre>
+
+<h1>
+<a id="if-axiom_big_endian-2" class="anchor" href="#if-axiom_big_endian-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>if AXIOM_BIG_ENDIAN</h1>
+
+<pre><code>    [FieldOffset( 7 )] public byte b0;
+    [FieldOffset( 6 )] public byte b1;
+    [FieldOffset( 5 )] public byte b2;
+    [FieldOffset( 4 )] public byte b3;
+    [FieldOffset( 3 )] public byte b4;
+    [FieldOffset( 2 )] public byte b5;
+    [FieldOffset( 1 )] public byte b6;
+    [FieldOffset( 0 )] public byte b7;
+</code></pre>
+
+<h1>
+<a id="else-2" class="anchor" href="#else-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>else</h1>
+
+<pre><code>    [FieldOffset(0)]
+    public byte b0;
+
+    [FieldOffset(1)]
+    public byte b1;
+
+    [FieldOffset(2)]
+    public byte b2;
+
+    [FieldOffset(3)]
+    public byte b3;
+
+    [FieldOffset(4)]
+    public byte b4;
+
+    [FieldOffset(5)]
+    public byte b5;
+
+    [FieldOffset(6)]
+    public byte b6;
+
+    [FieldOffset(7)]
+    public byte b7;
+</code></pre>
+
+<h1>
+<a id="endif-2" class="anchor" href="#endif-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>endif</h1>
+
+<pre><code>    public byte[] Bytes {
+        get {
+            return new[]
+                   {
+                    this.b0, this.b1, this.b2, this.b3, this.b4, this.b5, this.b6, this.b7
+                   };
+        }
+        set {
+            this.b0 = value[0];
+            this.b1 = value[1];
+            this.b2 = value[2];
+            this.b3 = value[3];
+            this.b4 = value[4];
+            this.b5 = value[5];
+            this.b6 = value[6];
+            this.b7 = value[7];
+        }
+    }
+};
+
+public abstract class BufferBase : DisposableObject, ICloneable {
+    #region Fields
+
+    protected GCHandle PinHandle;
+    protected int PinCount;
+    private static readonly object _mutex = new object();
+
+    #endregion Fields
+
+    public abstract int Ptr { get; set; }
+
+    /// &lt;summary&gt;
+    /// Gets a 32-bit integer that represents the length of this Buffer ( expressed in bytes )
+    /// &lt;/summary&gt;
+    public virtual int Length { get; protected set; }
+
+    public BufferBase Offset(int offset) {
+        Ptr += offset;
+        return this;
+    }
+
+    public static BufferBase operator +(BufferBase buffer, int offset) {
+        // avoid useless clones
+        if (offset == 0) {
+            return buffer;
+        }
+
+        var buf = (BufferBase)buffer.Clone();
+        buf.Ptr += offset;
+        return buf;
+    }
+
+    public static BufferBase operator +(BufferBase buffer, long offset) {
+        return buffer + (int)offset;
+    }
+
+    public static BufferBase operator ++(BufferBase buffer) {
+        buffer.Ptr++;
+        return buffer;
+    }
+
+    protected override void dispose(bool disposeManagedResources) {
+        if (!IsDisposed) {
+            if (disposeManagedResources) {
+            }
+
+            UnPin(true);
+        }
+
+        base.dispose(disposeManagedResources);
+    }
+
+    public abstract object Clone();
+
+    public virtual void Copy(BufferBase src, int srcOffset, int destOffset, int length) {
+        if (src == null || srcOffset &lt; 0 || destOffset &lt; 0 || length &lt; 0)
+            throw new ArgumentException();
+
+        // Ensure we don't read past the end of either buffer.
+        if ((src.Ptr + srcOffset) + length &gt; src.Length || (this.Ptr + destOffset) + length &gt; this.Length)
+            throw new ArgumentOutOfRangeException();
+    }
+
+    protected void checkBounds(int value) {
+        if (value &lt; 0 || value &gt;= this.Length)
+            throw new ArgumentOutOfRangeException();
+    }
+
+    //#if !AXIOM_SAFE_ONLY
+    public abstract IntPtr Pin();
+</code></pre>
+
+<h1>
+<a id="if-net_40" class="anchor" href="#if-net_40" aria-hidden="true"><span class="octicon octicon-link"></span></a>if NET_40</h1>
+
+<pre><code>    public void UnPin( bool all = false )
+</code></pre>
+
+<h1>
+<a id="else-3" class="anchor" href="#else-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>else</h1>
+
+<pre><code>    public void UnPin(bool all)
+</code></pre>
+
+<h1>
+<a id="endif-3" class="anchor" href="#endif-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>endif</h1>
+
+<p>{
+            if (this.PinHandle.IsAllocated &amp;&amp; (all || Interlocked.Decrement(ref this.PinCount) == 0)) {
+                lock (_mutex) {
+                    this.PinHandle.Free();
+                    this.PinCount = 0;
+                }
+            }
+        }</p>
+
+<h1>
+<a id="if-net_40-1" class="anchor" href="#if-net_40-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>if !NET_40</h1>
+
+<pre><code>    public void UnPin() {
+        UnPin(false);
+    }
+</code></pre>
+
+<h1>
+<a id="endif-4" class="anchor" href="#endif-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>endif</h1>
+
+<pre><code>    //#endif
+</code></pre>
+
+<h1>
+<a id="if-axiom_safe_mix" class="anchor" href="#if-axiom_safe_mix" aria-hidden="true"><span class="octicon octicon-link"></span></a>if AXIOM_SAFE_MIX</h1>
+
+<pre><code>    public static BufferBase Wrap( byte[] buffer )
+    {
+        return new ManagedBuffer( buffer );
+    }
+
+    public static BufferBase Wrap( IntPtr buffer, int length )
+    {
+        return new UnsafeBuffer( buffer, length );
+    }
+
+    public static BufferBase Wrap( object buffer, int length = 0 )
+    {
+        return new UnsafeBuffer( buffer, length );
+    }
+</code></pre>
+
+<h1>
+<a id="elif-axiom_safe_only" class="anchor" href="#elif-axiom_safe_only" aria-hidden="true"><span class="octicon octicon-link"></span></a>elif AXIOM_SAFE_ONLY</h1>
+
+<pre><code>    public static BufferBase Wrap( byte[] buffer )
+    {
+        return new ManagedBuffer( buffer );
+    }
+
+    public static BufferBase Wrap( IntPtr buffer, int length )
+    {
+        return new ManagedBuffer( buffer, length );
+    }
+
+    public static BufferBase Wrap( object buffer, int length = 0 )
+    {
+        return new ManagedBuffer( buffer );
+    }
+</code></pre>
+
+<h1>
+<a id="else-4" class="anchor" href="#else-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>else</h1>
+
+<pre><code>    public static BufferBase Wrap(byte[] buffer) {
+        return new UnsafeBuffer(buffer, buffer.Length);
+    }
+
+    public static BufferBase Wrap(IntPtr buffer, int length) {
+        return new UnsafeBuffer(buffer, length);
+    }
+
+    public static BufferBase Wrap(object buffer, int length) {
+        return new UnsafeBuffer(buffer, length);
+    }
+</code></pre>
+
+<h1>
+<a id="endif-5" class="anchor" href="#endif-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>endif</h1>
+
+<h1>
+<a id="if-axiom_safe_only" class="anchor" href="#if-axiom_safe_only" aria-hidden="true"><span class="octicon octicon-link"></span></a>if AXIOM_SAFE_ONLY</h1>
+
+<pre><code>    public ITypePointer&lt;byte&gt; ToBytePointer()
+    {
+        return this as ITypePointer&lt;byte&gt;;
+    }
+
+    public ITypePointer&lt;short&gt; ToShortPointer()
+    {
+        return this as ITypePointer&lt;short&gt;;
+    }
+
+    public ITypePointer&lt;ushort&gt; ToUShortPointer()
+    {
+        return this as ITypePointer&lt;ushort&gt;;
+    }
+
+    public ITypePointer&lt;int&gt; ToIntPointer()
+    {
+        return this as ITypePointer&lt;int&gt;;
+    }
+
+    public ITypePointer&lt;uint&gt; ToUIntPointer()
+    {
+        return this as ITypePointer&lt;uint&gt;;
+    }
+
+    public ITypePointer&lt;long&gt; ToLongPointer()
+    {
+        return this as ITypePointer&lt;long&gt;;
+    }
+
+    public ITypePointer&lt;ulong&gt; ToULongPointer()
+    {
+        return this as ITypePointer&lt;ulong&gt;;
+    }
+
+    public ITypePointer&lt;float&gt; ToFloatPointer()
+    {
+        return this as ITypePointer&lt;float&gt;;
+    }
+
+    public ITypePointer&lt;double&gt; ToDoublePointer()
+    {
+        return this as ITypePointer&lt;double&gt;;
+    }
+</code></pre>
+
+<h1>
+<a id="else-5" class="anchor" href="#else-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>else</h1>
+
+<pre><code>    public unsafe byte* ToBytePointer() {
+        return (byte*)Pin();
+    }
+
+    public unsafe short* ToShortPointer() {
+        return (short*)Pin();
+    }
+
+    public unsafe ushort* ToUShortPointer() {
+        return (ushort*)Pin();
+    }
+
+    public unsafe int* ToIntPointer() {
+        return (int*)Pin();
+    }
+
+    public unsafe uint* ToUIntPointer() {
+        return (uint*)Pin();
+    }
+
+    public unsafe long* ToLongPointer() {
+        return (long*)Pin();
+    }
+
+    public unsafe ulong* ToULongPointer() {
+        return (ulong*)Pin();
+    }
+
+    public unsafe float* ToFloatPointer() {
+        return (float*)Pin();
+    }
+
+    public unsafe double* ToDoublePointer() {
+        return (double*)Pin();
+    }
+</code></pre>
+
+<h1>
+<a id="endif-6" class="anchor" href="#endif-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>endif</h1>
+
+<pre><code>};
+
+public class ManagedBuffer
+    : BufferBase, ITypePointer&lt;byte&gt;, ITypePointer&lt;short&gt;, ITypePointer&lt;ushort&gt;, ITypePointer&lt;int&gt;, ITypePointer&lt;uint&gt;,
+      ITypePointer&lt;long&gt;, ITypePointer&lt;ulong&gt;, ITypePointer&lt;float&gt;, ITypePointer&lt;double&gt; {
+    protected internal readonly byte[] Buf;
+    protected internal int IdxPtr;
+    private object obj;
+    private static readonly object _pinMutex = new object();
+
+    public override int Ptr {
+        get {
+            return this.IdxPtr;
+        }
+        set {
+            this.IdxPtr = value;
+        }
+    }
+
+    public override int Length {
+        get {
+            return this.Buf.Length;
+        }
+    }
+
+    public ManagedBuffer(ManagedBuffer buffer)
+        : base() {
+        this.Buf = buffer.Buf;
+        this.IdxPtr = buffer.IdxPtr;
+    }
+
+    public ManagedBuffer(byte[] buffer)
+        : base() {
+        this.Buf = buffer;
+    }
+
+    public ManagedBuffer(object buffer)
+        : base() {
+        this.obj = buffer;
+        int size;
+        var t = this.obj.GetType();
+        if (t.IsArray) {
+            var buf = (Array)this.obj;
+            var te = t.GetElementType();
+            size = buf.Length * te.Size();
+            this.Buf = new byte[size];
+            if (te.IsPrimitive) {
+                Buffer.BlockCopy(buf, 0, this.Buf, 0, size);
+                return;
+            }
+            this.Buf.CopyFrom(buf);
+            return;
+        }
+        size = t.Size();
+        this.Buf = new byte[size];
+        this.Buf.CopyFrom(this.obj);
+    }
+
+    public ManagedBuffer(IntPtr buffer, int size)
+        : base() {
+        this.obj = buffer;
+        this.Buf = new byte[size];
+        Marshal.Copy(buffer, this.Buf, 0, size);
+    }
+
+    protected override void dispose(bool disposeManagedResources) {
+        if (!IsDisposed) {
+            if (disposeManagedResources &amp;&amp; this.obj != null) {
+                if (this.obj is IntPtr) {
+                    Marshal.Copy(this.Buf, 0, (IntPtr)this.obj, this.Length);
+                }
+                else {
+                    var t = this.obj.GetType();
+                    if (t.IsArray) {
+                        if (t.GetElementType().IsPrimitive) {
+                            Buffer.BlockCopy(this.Buf, 0, (Array)this.obj, 0, this.Length);
+                        }
+                        else {
+                            this.Buf.CopyTo((Array)this.obj);
+                        }
+                    }
+                    else {
+                        this.Buf.CopyTo(ref this.obj);
+                    }
+                }
+                this.obj = null;
+            }
+        }
+
+        base.dispose(disposeManagedResources);
+    }
+
+    public override object Clone() {
+        return new ManagedBuffer(this);
+    }
+
+    public override void Copy(BufferBase src, int srcOffset, int destOffset, int length) {
+        base.Copy(src, srcOffset, destOffset, length);
+
+        if (src is ManagedBuffer) {
+            Buffer.BlockCopy((src as ManagedBuffer).Buf, (src as ManagedBuffer).IdxPtr + srcOffset, this.Buf,
+                              this.IdxPtr + destOffset, length);
+        }
+</code></pre>
+
+<h1>
+<a id="if-axiom_safe_only-1" class="anchor" href="#if-axiom_safe_only-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>if !AXIOM_SAFE_ONLY</h1>
+
+<pre><code>        else if (src is UnsafeBuffer) {
+            Marshal.Copy((IntPtr)((int)src.Pin() + srcOffset), this.Buf, this.IdxPtr + destOffset, length);
+            src.UnPin();
+        }
+</code></pre>
+
+<h1>
+<a id="endif-7" class="anchor" href="#endif-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>endif</h1>
+
+<pre><code>    }
+
+    public override IntPtr Pin() {
+        if (Interlocked.Increment(ref PinCount) &gt; 0) {
+            lock (_pinMutex) {
+                return
+                    new IntPtr(
+                        (PinHandle.IsAllocated ? PinHandle : PinHandle = GCHandle.Alloc(this.Buf, GCHandleType.Pinned)).
+                            AddrOfPinnedObject().ToInt32() + this.IdxPtr);
+            }
+        }
+        throw new AxiomException("LockCount &lt;= 0");
+    }
+
+    //---------------------------------------------------------------------
+
+    byte ITypePointer&lt;byte&gt;.this[int index] {
+        get {
+            checkBounds(index + this.IdxPtr);
+            return this.Buf[index + this.IdxPtr];
+        }
+        set {
+            checkBounds(index + this.IdxPtr);
+            this.Buf[index + this.IdxPtr] = value;
+        }
+    }
+
+    short ITypePointer&lt;short&gt;.this[int index] {
+        get {
+            var buf = this.Buf;
+            index &lt;&lt;= 1;
+            checkBounds(index + this.IdxPtr + 1);
+            return new TwoByte {
+                b0 = buf[index += this.IdxPtr],
+                b1 = buf[++index],
+            }.Short;
+        }
+        set {
+            var buf = this.Buf;
+            index &lt;&lt;= 1;
+            checkBounds(index + this.IdxPtr + 1);
+            var v = new TwoByte {
+                Short = value
+            };
+            buf[index += this.IdxPtr] = v.b0;
+            buf[++index] = v.b1;
+        }
+    }
+
+    ushort ITypePointer&lt;ushort&gt;.this[int index] {
+        get {
+            var buf = this.Buf;
+            index &lt;&lt;= 1;
+            checkBounds(index + this.IdxPtr + 1);
+            return new TwoByte {
+                b0 = buf[index += this.IdxPtr],
+                b1 = buf[++index],
+            }.UShort;
+        }
+        set {
+            var buf = this.Buf;
+            index &lt;&lt;= 1;
+            checkBounds(index + this.IdxPtr + 1);
+            var v = new TwoByte {
+                UShort = value
+            };
+            buf[index += this.IdxPtr] = v.b0;
+            buf[++index] = v.b1;
+        }
+    }
+
+    int ITypePointer&lt;int&gt;.this[int index] {
+        get {
+            var buf = this.Buf;
+            index &lt;&lt;= 2;
+            checkBounds(index + this.IdxPtr + 3);
+            return new FourByte {
+                b0 = buf[index += this.IdxPtr],
+                b1 = buf[++index],
+                b2 = buf[++index],
+                b3 = buf[++index],
+            }.Int;
+        }
+        set {
+            var buf = this.Buf;
+            index &lt;&lt;= 2;
+            checkBounds(index + this.IdxPtr + 3);
+            var v = new FourByte {
+                Int = value
+            };
+            buf[index += this.IdxPtr] = v.b0;
+            buf[++index] = v.b1;
+            buf[++index] = v.b2;
+            buf[++index] = v.b3;
+        }
+    }
+
+    uint ITypePointer&lt;uint&gt;.this[int index] {
+        get {
+            var buf = this.Buf;
+            index &lt;&lt;= 2;
+            checkBounds(index + this.IdxPtr + 3);
+            return new FourByte {
+                b0 = buf[index += this.IdxPtr],
+                b1 = buf[++index],
+                b2 = buf[++index],
+                b3 = buf[++index],
+            }.UInt;
+        }
+        set {
+            var buf = this.Buf;
+            index &lt;&lt;= 2;
+            checkBounds(index + this.IdxPtr + 3);
+            var v = new FourByte {
+                UInt = value
+            };
+            buf[index += this.IdxPtr] = v.b0;
+            buf[++index] = v.b1;
+            buf[++index] = v.b2;
+            buf[++index] = v.b3;
+        }
+    }
+
+    long ITypePointer&lt;long&gt;.this[int index] {
+        get {
+            var buf = this.Buf;
+            index &lt;&lt;= 3;
+            checkBounds(index + this.IdxPtr + 7);
+            return new EightByte {
+                b0 = buf[index += this.IdxPtr],
+                b1 = buf[++index],
+                b2 = buf[++index],
+                b3 = buf[++index],
+                b4 = buf[++index],
+                b5 = buf[++index],
+                b6 = buf[++index],
+                b7 = buf[++index],
+            }.Long;
+        }
+        set {
+            var buf = this.Buf;
+            index &lt;&lt;= 3;
+            checkBounds(index + this.IdxPtr + 7);
+            var v = new EightByte {
+                Long = value
+            };
+            buf[index += this.IdxPtr] = v.b0;
+            buf[++index] = v.b1;
+            buf[++index] = v.b2;
+            buf[++index] = v.b3;
+            buf[++index] = v.b4;
+            buf[++index] = v.b5;
+            buf[++index] = v.b6;
+            buf[++index] = v.b7;
+        }
+    }
+
+    ulong ITypePointer&lt;ulong&gt;.this[int index] {
+        get {
+            var buf = this.Buf;
+            index &lt;&lt;= 3;
+            checkBounds(index + this.IdxPtr + 7);
+            return new EightByte {
+                b0 = buf[index += this.IdxPtr],
+                b1 = buf[++index],
+                b2 = buf[++index],
+                b3 = buf[++index],
+                b4 = buf[++index],
+                b5 = buf[++index],
+                b6 = buf[++index],
+                b7 = buf[++index],
+            }.ULong;
+        }
+        set {
+            var buf = this.Buf;
+            index &lt;&lt;= 3;
+            checkBounds(index + this.IdxPtr + 7);
+            var v = new EightByte {
+                ULong = value
+            };
+            buf[index += this.IdxPtr] = v.b0;
+            buf[++index] = v.b1;
+            buf[++index] = v.b2;
+            buf[++index] = v.b3;
+            buf[++index] = v.b4;
+            buf[++index] = v.b5;
+            buf[++index] = v.b6;
+            buf[++index] = v.b7;
+        }
+    }
+
+    float ITypePointer&lt;float&gt;.this[int index] {
+        get {
+            var buf = this.Buf;
+            index &lt;&lt;= 2;
+            checkBounds(index + this.IdxPtr + 3);
+            return new FourByte {
+                b0 = buf[index += this.IdxPtr],
+                b1 = buf[++index],
+                b2 = buf[++index],
+                b3 = buf[++index],
+            }.Float;
+        }
+        set {
+            var buf = this.Buf;
+            index &lt;&lt;= 2;
+            checkBounds(index + this.IdxPtr + 3);
+            var v = new FourByte {
+                Float = value
+            };
+            buf[index += this.IdxPtr] = v.b0;
+            buf[++index] = v.b1;
+            buf[++index] = v.b2;
+            buf[++index] = v.b3;
+        }
+    }
+
+    double ITypePointer&lt;double&gt;.this[int index] {
+        get {
+            var buf = this.Buf;
+            index &lt;&lt;= 3;
+            checkBounds(index + this.IdxPtr + 7);
+            return new EightByte {
+                b0 = buf[index += this.IdxPtr],
+                b1 = buf[++index],
+                b2 = buf[++index],
+                b3 = buf[++index],
+                b4 = buf[++index],
+                b5 = buf[++index],
+                b6 = buf[++index],
+                b7 = buf[++index],
+            }.Double;
+        }
+        set {
+            var buf = this.Buf;
+            index &lt;&lt;= 3;
+            checkBounds(index + this.IdxPtr + 7);
+            var v = new EightByte {
+                Double = value
+            };
+            buf[index += this.IdxPtr] = v.b0;
+            buf[++index] = v.b1;
+            buf[++index] = v.b2;
+            buf[++index] = v.b3;
+            buf[++index] = v.b4;
+            buf[++index] = v.b5;
+            buf[++index] = v.b6;
+            buf[++index] = v.b7;
+        }
+    }
+};
+
+public class BitConvertBuffer
+    : ManagedBuffer, ITypePointer&lt;short&gt;, ITypePointer&lt;ushort&gt;, ITypePointer&lt;int&gt;, ITypePointer&lt;uint&gt;, ITypePointer&lt;long&gt;,
+      ITypePointer&lt;ulong&gt;, ITypePointer&lt;float&gt;, ITypePointer&lt;double&gt; {
+    public BitConvertBuffer(ManagedBuffer buffer)
+        : base(buffer) {
+    }
+
+    public BitConvertBuffer(byte[] buffer)
+        : base(buffer) {
+    }
+
+    public BitConvertBuffer(object buffer)
+        : base(buffer) {
+    }
+
+    public BitConvertBuffer(IntPtr buffer, int size)
+        : base(buffer, size) {
+    }
+
+    short ITypePointer&lt;short&gt;.this[int index] {
+        get {
+            var idx = (index &lt;&lt; 1) + IdxPtr;
+            checkBounds(idx + 1);
+            return BitConverter.ToInt16(Buf, idx);
+        }
+        set {
+            index = (index &lt;&lt; 1) + IdxPtr;
+            checkBounds(index + 1);
+            var v = BitConverter.GetBytes(value);
+            Buffer.BlockCopy(v, 0, Buf, index, sizeof(short));
+        }
+    }
+
+    ushort ITypePointer&lt;ushort&gt;.this[int index] {
+        get {
+            var idx = (index &lt;&lt; 1) + IdxPtr;
+            checkBounds(idx + 1);
+            return BitConverter.ToUInt16(Buf, idx);
+        }
+        set {
+            index = (index &lt;&lt; 1) + IdxPtr;
+            checkBounds(index + 1);
+            var v = BitConverter.GetBytes(value);
+            Buffer.BlockCopy(v, 0, Buf, index, sizeof(ushort));
+        }
+    }
+
+    int ITypePointer&lt;int&gt;.this[int index] {
+        get {
+            var idx = (index &lt;&lt; 2) + IdxPtr;
+            checkBounds(idx + 3);
+            return BitConverter.ToInt32(Buf, idx);
+        }
+        set {
+            index = (index &lt;&lt; 2) + IdxPtr;
+            checkBounds(index + 3);
+            var v = BitConverter.GetBytes(value);
+            Buffer.BlockCopy(v, 0, Buf, index, sizeof(int));
+        }
+    }
+
+    uint ITypePointer&lt;uint&gt;.this[int index] {
+        get {
+            var idx = (index &lt;&lt; 2) + IdxPtr;
+            checkBounds(idx + 3);
+            return BitConverter.ToUInt32(Buf, idx);
+        }
+        set {
+            index = (index &lt;&lt; 2) + IdxPtr;
+            checkBounds(index + 3);
+            var v = BitConverter.GetBytes(value);
+            Buffer.BlockCopy(v, 0, Buf, index, sizeof(uint));
+        }
+    }
+
+    long ITypePointer&lt;long&gt;.this[int index] {
+        get {
+            var idx = (index &lt;&lt; 3) + IdxPtr;
+            checkBounds(idx + 7);
+            return BitConverter.ToInt64(Buf, idx);
+        }
+        set {
+            index = (index &lt;&lt; 3) + IdxPtr;
+            checkBounds(index + 7);
+            var v = BitConverter.GetBytes(value);
+            Buffer.BlockCopy(v, 0, Buf, index, sizeof(long));
+        }
+    }
+
+    ulong ITypePointer&lt;ulong&gt;.this[int index] {
+        get {
+            var idx = (index &lt;&lt; 3) + IdxPtr;
+            checkBounds(idx + 7);
+            return BitConverter.ToUInt64(Buf, idx);
+        }
+        set {
+            index = (index &lt;&lt; 3) + IdxPtr;
+            checkBounds(index + 7);
+            var v = BitConverter.GetBytes(value);
+            Buffer.BlockCopy(v, 0, Buf, index, sizeof(ulong));
+        }
+    }
+
+    float ITypePointer&lt;float&gt;.this[int index] {
+        get {
+            var idx = (index &lt;&lt; 2) + IdxPtr;
+            checkBounds(idx + 3);
+            return BitConverter.ToSingle(Buf, idx);
+        }
+        set {
+            index = (index &lt;&lt; 2) + IdxPtr;
+            checkBounds(index + 3);
+            var v = BitConverter.GetBytes(value);
+            Buffer.BlockCopy(v, 0, Buf, index, sizeof(float));
+        }
+    }
+
+    double ITypePointer&lt;double&gt;.this[int index] {
+        get {
+            var idx = (index &lt;&lt; 3) + IdxPtr;
+            checkBounds(idx + 7);
+            return BitConverter.ToDouble(Buf, idx);
+        }
+        set {
+            index = (index &lt;&lt; 3) + IdxPtr;
+            checkBounds(index + 7);
+            var v = BitConverter.GetBytes(value);
+            Buffer.BlockCopy(v, 0, Buf, index, sizeof(double));
+        }
+    }
+};
+</code></pre>
+
+<h1>
+<a id="if-axiom_safe_only-2" class="anchor" href="#if-axiom_safe_only-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>if !AXIOM_SAFE_ONLY</h1>
+
+<pre><code>public class UnsafeBuffer
+    : BufferBase, ITypePointer&lt;byte&gt;, ITypePointer&lt;short&gt;, ITypePointer&lt;ushort&gt;, ITypePointer&lt;int&gt;, ITypePointer&lt;uint&gt;,
+      ITypePointer&lt;long&gt;, ITypePointer&lt;ulong&gt;, ITypePointer&lt;float&gt;, ITypePointer&lt;double&gt; {
+    internal readonly unsafe byte* Buf;
+    internal unsafe byte* PtrBuf;
+
+    public override int Ptr {
+        get {
+            unsafe {
+                return (int)(this.PtrBuf - this.Buf);
+            }
+        }
+        set {
+            unsafe {
+                this.PtrBuf = this.Buf + value;
+            }
+        }
+    }
+
+    public UnsafeBuffer(object buffer, int length)
+        : base() {
+        unsafe {
+            this.Buf = (byte*)(PinHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned)).AddrOfPinnedObject();
+            PinCount = 1;
+            this.PtrBuf = this.Buf;
+            this.Length = length;
+        }
+    }
+
+    public UnsafeBuffer(IntPtr buffer, int length)
+        : base() {
+        unsafe {
+            this.Buf = (byte*)buffer;
+            this.PtrBuf = this.Buf;
+            this.Length = length;
+        }
+    }
+
+    public override object Clone() {
+        unsafe {
+            return new UnsafeBuffer((IntPtr)this.Buf, Length) {
+                Ptr = Ptr,
+            };
+        }
+    }
+
+    public override void Copy(BufferBase src, int srcOffset, int destOffset, int length) {
+        base.Copy(src, srcOffset, destOffset, length);
+
+        unsafe {
+            if (src is ManagedBuffer) {
+                Marshal.Copy((src as ManagedBuffer).Buf, (src as ManagedBuffer).IdxPtr + srcOffset,
+                              (IntPtr)(this.PtrBuf + destOffset), length);
+            }
+            else if (src is UnsafeBuffer) {
+                var pSrc = src.ToBytePointer();
+                var pDest = this.ToBytePointer();
+
+                //Following code snippet was taken from http://msdn.microsoft.com/en-us/library/28k1s2k6(v=vs.80).aspx
+                var ps = pSrc + srcOffset;
+                var pd = pDest + destOffset;
+
+                // Loop over the count in blocks of 4 bytes, copying an integer (4 bytes) at a time:
+                for (var i = 0; i &lt; length / 4; i++) {
+                    *((int*)pd) = *((int*)ps);
+                    pd += 4;
+                    ps += 4;
+                }
+
+                // Complete the copy by moving any bytes that weren't moved in blocks of 4:
+                for (var i = 0; i &lt; length % 4; i++) {
+                    *pd = *ps;
+                    pd++;
+                    ps++;
+                }
+            }
+        }
+    }
+
+    public override IntPtr Pin() {
+        unsafe {
+            Interlocked.Increment(ref PinCount);
+            return (IntPtr)this.PtrBuf;
+        }
+    }
+
+    //---------------------------------------------------------------------
+
+    byte ITypePointer&lt;byte&gt;.this[int index] {
+        get {
+            unsafe {
+                checkBounds(this.Ptr + index);
+                return *(this.PtrBuf + index);
+            }
+        }
+        set {
+            unsafe {
+                checkBounds(this.Ptr + index);
+                *(this.PtrBuf + index) = value;
+            }
+        }
+    }
+
+    short ITypePointer&lt;short&gt;.this[int index] {
+        get {
+            unsafe {
+                index &lt;&lt;= 1;
+                checkBounds(this.Ptr + index);
+                return *(short*)(this.PtrBuf + index);
+            }
+        }
+        set {
+            unsafe {
+                index &lt;&lt;= 1;
+                checkBounds(this.Ptr + index);
+                *(short*)(this.PtrBuf + index) = value;
+            }
+        }
+    }
+
+    ushort ITypePointer&lt;ushort&gt;.this[int index] {
+        get {
+            unsafe {
+                index &lt;&lt;= 1;
+                checkBounds(this.Ptr + index);
+                return *(ushort*)(this.PtrBuf + index);
+            }
+        }
+        set {
+            unsafe {
+                index &lt;&lt;= 1;
+                checkBounds(this.Ptr + index);
+                *(ushort*)(this.PtrBuf + index) = value;
+            }
+        }
+    }
+
+    int ITypePointer&lt;int&gt;.this[int index] {
+        get {
+            unsafe {
+                index &lt;&lt;= 2;
+                checkBounds(this.Ptr + index);
+                return *(int*)(this.PtrBuf + index);
+            }
+        }
+        set {
+            unsafe {
+                index &lt;&lt;= 2;
+                checkBounds(this.Ptr + index);
+                *(int*)(this.PtrBuf + index) = value;
+            }
+        }
+    }
+
+    uint ITypePointer&lt;uint&gt;.this[int index] {
+        get {
+            unsafe {
+                index &lt;&lt;= 2;
+                checkBounds(this.Ptr + index);
+                return *(uint*)(this.PtrBuf + index);
+            }
+        }
+        set {
+            unsafe {
+                index &lt;&lt;= 2;
+                checkBounds(this.Ptr + index);
+                *(uint*)(this.PtrBuf + index) = value;
+            }
+        }
+    }
+
+    long ITypePointer&lt;long&gt;.this[int index] {
+        get {
+            unsafe {
+                index &lt;&lt;= 3;
+                checkBounds(this.Ptr + index);
+                return *(long*)(this.PtrBuf + index);
+            }
+        }
+        set {
+            unsafe {
+                index &lt;&lt;= 3;
+                checkBounds(this.Ptr + index);
+                *(long*)(this.PtrBuf + index) = value;
+            }
+        }
+    }
+
+    ulong ITypePointer&lt;ulong&gt;.this[int index] {
+        get {
+            unsafe {
+                index &lt;&lt;= 3;
+                checkBounds(this.Ptr + index);
+                return *(ulong*)(this.PtrBuf + index);
+            }
+        }
+        set {
+            unsafe {
+                index &lt;&lt;= 3;
+                checkBounds(this.Ptr + index);
+                *(ulong*)(this.PtrBuf + index) = value;
+            }
+        }
+    }
+
+    float ITypePointer&lt;float&gt;.this[int index] {
+        get {
+            unsafe {
+                index &lt;&lt;= 2;
+                checkBounds(this.Ptr + index);
+                return *(float*)(this.PtrBuf + index);
+            }
+        }
+        set {
+            unsafe {
+                index &lt;&lt;= 2;
+                checkBounds(this.Ptr + index);
+                *(float*)(this.PtrBuf + index) = value;
+            }
+        }
+    }
+
+    double ITypePointer&lt;double&gt;.this[int index] {
+        get {
+            unsafe {
+                index &lt;&lt;= 3;
+                checkBounds(this.Ptr + index);
+                return *(double*)(this.PtrBuf + index);
+            }
+        }
+        set {
+            unsafe {
+                index &lt;&lt;= 3;
+                checkBounds(this.Ptr + index);
+                *(double*)(this.PtrBuf + index) = value;
+            }
+        }
+    }
+};
+</code></pre>
+
+<h1>
+<a id="endif-8" class="anchor" href="#endif-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>endif</h1>
+
+<p>}</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/RainsSoft/UAxiom3D-Lib">Uaxiom3d-lib</a> is maintained by <a href="https://github.com/RainsSoft">RainsSoft</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
