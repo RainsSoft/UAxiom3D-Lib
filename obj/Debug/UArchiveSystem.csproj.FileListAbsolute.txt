@@ -1,0 +1,6 @@
+F:\IRobot发布-sgd\rains\Axiom-SDK-Source-0.8.3102.12095\Projects\UArchiveSystem\obj\Debug\ResolveAssemblyReference.cache
+F:\IRobot发布-sgd\rains\Axiom-SDK-Source-0.8.3102.12095\Projects\UArchiveSystem\bin\Debug\UArchiveSystem.dll
+F:\IRobot发布-sgd\rains\Axiom-SDK-Source-0.8.3102.12095\Projects\UArchiveSystem\bin\Debug\UArchiveSystem.pdb
+F:\IRobot发布-sgd\rains\Axiom-SDK-Source-0.8.3102.12095\Projects\UArchiveSystem\bin\Debug\UnityEngine.xml
+F:\IRobot发布-sgd\rains\Axiom-SDK-Source-0.8.3102.12095\Projects\UArchiveSystem\obj\Debug\UArchiveSystem.dll
+F:\IRobot发布-sgd\rains\Axiom-SDK-Source-0.8.3102.12095\Projects\UArchiveSystem\obj\Debug\UArchiveSystem.pdb
